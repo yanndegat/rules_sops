@@ -1,0 +1,25 @@
+module(
+    name = "rules_sops",
+    version = "0.0.1",
+    repo_name = "rules_sops",
+)
+
+bazel_dep(name = "platforms", version = "0.0.7")
+
+repos = use_extension("@rules_sops//sops:extensions.bzl", "repositories")
+
+repos.download(
+    version = "3.8.1",
+    sha256 = "d6bf07fb61972127c9e0d622523124c2d81caf9f7971fb123228961021811697",
+    os = "linux",
+    arch = "amd64",
+)
+
+use_repo(
+    repos,
+    "sops",
+)
+
+register_toolchains(
+    "@rules_sops//:linux_amd64_toolchain",
+)

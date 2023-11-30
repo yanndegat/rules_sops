@@ -1,0 +1,15 @@
+load("@rules_sops//sops:def.bzl", "sops_age_encrypt")
+
+sops_age_encrypt(
+    name = "enc",
+    src = ":test.yaml",
+    age_key = "age1kle8wr7000jz9209gj774t96c3cmnpamzgpng967y6gfu7dwfuas4s6h82",
+    opts = ["--ignore-mac", "--encrypted-regex", "^(data|stringData)$"],
+)
+
+sops_age_encrypt(
+    name = "enc-preenc",
+    src = ":test_preencrypted_value.yaml",
+    age_key = "age1kle8wr7000jz9209gj774t96c3cmnpamzgpng967y6gfu7dwfuas4s6h82",
+    opts = ["--ignore-mac", "--encrypted-regex", "^(data|stringData)$"],
+)
